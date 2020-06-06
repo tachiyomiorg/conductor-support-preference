@@ -1,3 +1,1 @@
-<manifest package="androidx.preference.conductor">
-
-</manifest>
+<manifest package="androidx.preference.conductor" />
