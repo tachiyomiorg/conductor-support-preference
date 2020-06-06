@@ -64,12 +64,17 @@ public class EditTextPreferenceDialogController extends PreferenceDialogControll
         super.onBindDialogView(view);
 
         mEditText = view.findViewById(android.R.id.edit);
-        mEditText.requestFocus();
-
         if (mEditText == null) {
             throw new IllegalStateException("Dialog view must contain an EditText with id" +
                     " @android:id/edit");
         }
+
+        EditTextPreference.OnBindEditTextListener listener = getEditTextPreference().getOnBindEditTextListener();
+        if (listener != null) {
+            listener.onBindEditText(mEditText);
+        }
+
+        mEditText.requestFocus();
 
         mEditText.setText(mText);
         // Place cursor at the end
