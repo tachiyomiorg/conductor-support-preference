@@ -5,8 +5,12 @@ Library to create preference screens using [Conductor](https://github.com/blueli
 You can include this library in your project with [JitPack](https://jitpack.io).
 
 ```groovy
+repositories {
+    maven { url = "https://www.jitpack.io" }
+}
+
 dependencies {
-    implementation 'com.github.tachiyomiorg:conductor-support-preference:1.1.1'
+    implementation 'com.github.tachiyomiorg:conductor-support-preference:2.0.0'
 }
 ```
 
