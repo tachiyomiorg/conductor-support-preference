@@ -25,18 +25,24 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.*;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
+
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
-import androidx.appcompat.app.AlertDialog;
+
 import com.bluelinelabs.conductor.Controller;
 import com.bluelinelabs.conductor.RestoreViewOnCreateController;
 import com.bluelinelabs.conductor.Router;
 import com.bluelinelabs.conductor.RouterTransaction;
 import com.bluelinelabs.conductor.changehandler.SimpleSwapChangeHandler;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 
@@ -168,7 +174,7 @@ public abstract class PreferenceDialogController extends RestoreViewOnCreateCont
         final Context context = getActivity();
         mWhichButtonClicked = DialogInterface.BUTTON_NEGATIVE;
 
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context)
+        final MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(context)
                 .setTitle(mDialogTitle)
                 .setIcon(mDialogIcon)
                 .setPositiveButton(mPositiveButtonText, this)
@@ -282,10 +288,10 @@ public abstract class PreferenceDialogController extends RestoreViewOnCreateCont
      * Prepares the dialog builder to be shown when the preference is clicked.
      * Use this to set custom properties on the dialog.
      * <p>
-     * Do not {@link AlertDialog.Builder#create()} or
-     * {@link AlertDialog.Builder#show()}.
+     * Do not {@link MaterialAlertDialogBuilder#create()} or
+     * {@link MaterialAlertDialogBuilder#show()}.
      */
-    protected void onPrepareDialogBuilder(AlertDialog.Builder builder) {
+    protected void onPrepareDialogBuilder(MaterialAlertDialogBuilder builder) {
     }
 
     /**

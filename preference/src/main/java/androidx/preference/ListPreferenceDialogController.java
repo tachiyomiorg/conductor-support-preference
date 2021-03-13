@@ -18,8 +18,10 @@ package androidx.preference;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class ListPreferenceDialogController extends PreferenceDialogController {
 
@@ -79,23 +81,20 @@ public class ListPreferenceDialogController extends PreferenceDialogController {
     }
 
     @Override
-    protected void onPrepareDialogBuilder(AlertDialog.Builder builder) {
+    protected void onPrepareDialogBuilder(MaterialAlertDialogBuilder builder) {
         super.onPrepareDialogBuilder(builder);
 
         builder.setSingleChoiceItems(mEntries, mClickedDialogEntryIndex,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mClickedDialogEntryIndex = which;
+                (dialog, which) -> {
+                    mClickedDialogEntryIndex = which;
 
-                        /*
-                         * Clicking on an item simulates the positive button
-                         * click, and dismisses the dialog.
-                         */
-                        ListPreferenceDialogController.this.onClick(dialog,
-                                DialogInterface.BUTTON_POSITIVE);
-                        dialog.dismiss();
-                    }
+                    /*
+                     * Clicking on an item simulates the positive button
+                     * click, and dismisses the dialog.
+                     */
+                    ListPreferenceDialogController.this.onClick(dialog,
+                            DialogInterface.BUTTON_POSITIVE);
+                    dialog.dismiss();
                 });
 
         /*

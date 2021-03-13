@@ -16,11 +16,11 @@
 
 package androidx.preference;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.preference.MultiSelectListPreference;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -99,7 +99,7 @@ public class MultiSelectListPreferenceDialogController extends PreferenceDialogC
     }
 
     @Override
-    protected void onPrepareDialogBuilder(AlertDialog.Builder builder) {
+    protected void onPrepareDialogBuilder(MaterialAlertDialogBuilder builder) {
         super.onPrepareDialogBuilder(builder);
 
         final int entryCount = mEntryValues.length;
@@ -108,16 +108,13 @@ public class MultiSelectListPreferenceDialogController extends PreferenceDialogC
             checkedItems[i] = mNewValues.contains(mEntryValues[i].toString());
         }
         builder.setMultiChoiceItems(mEntries, checkedItems,
-                new DialogInterface.OnMultiChoiceClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                        if (isChecked) {
-                            mPreferenceChanged |= mNewValues.add(
-                                    mEntryValues[which].toString());
-                        } else {
-                            mPreferenceChanged |= mNewValues.remove(
-                                    mEntryValues[which].toString());
-                        }
+                (dialog, which, isChecked) -> {
+                    if (isChecked) {
+                        mPreferenceChanged |= mNewValues.add(
+                                mEntryValues[which].toString());
+                    } else {
+                        mPreferenceChanged |= mNewValues.remove(
+                                mEntryValues[which].toString());
                     }
                 });
     }
