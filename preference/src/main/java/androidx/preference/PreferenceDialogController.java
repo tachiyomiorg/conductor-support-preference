@@ -38,7 +38,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RestrictTo;
 
 import com.bluelinelabs.conductor.Controller;
-import com.bluelinelabs.conductor.RestoreViewOnCreateController;
 import com.bluelinelabs.conductor.Router;
 import com.bluelinelabs.conductor.RouterTransaction;
 import com.bluelinelabs.conductor.changehandler.SimpleSwapChangeHandler;
@@ -53,7 +52,7 @@ import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
  * is read once during the initial call to {@link #onCreate(Bundle)} and saved/restored in the saved
  * instance state. Custom subclasses should also follow this pattern.
  */
-public abstract class PreferenceDialogController extends RestoreViewOnCreateController implements
+public abstract class PreferenceDialogController extends Controller implements
         DialogInterface.OnClickListener {
 
     protected static final String ARG_KEY = "key";
