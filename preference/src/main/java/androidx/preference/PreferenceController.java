@@ -138,7 +138,6 @@ public abstract class PreferenceController extends Controller implements
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-
                 case MSG_BIND_PREFERENCES:
                     bindPreferences();
                     break;
@@ -641,35 +640,32 @@ public abstract class PreferenceController extends Controller implements
     }
 
     private void scrollToPreferenceInternal(final Preference preference, final String key) {
-        final Runnable r = new Runnable() {
-            @Override
-            public void run() {
-                final RecyclerView.Adapter adapter = mList.getAdapter();
-                if (!(adapter instanceof
-                        PreferenceGroup.PreferencePositionCallback)) {
-                    if (adapter != null) {
-                        throw new IllegalStateException("Adapter must implement "
-                                + "PreferencePositionCallback");
-                    } else {
-                        // Adapter was set to null, so don't scroll I guess?
-                        return;
-                    }
-                }
-                final int position;
-                if (preference != null) {
-                    position = ((PreferenceGroup.PreferencePositionCallback) adapter)
-                            .getPreferenceAdapterPosition(preference);
+        final Runnable r = () -> {
+            final RecyclerView.Adapter adapter = mList.getAdapter();
+            if (!(adapter instanceof
+                    PreferenceGroup.PreferencePositionCallback)) {
+                if (adapter != null) {
+                    throw new IllegalStateException("Adapter must implement "
+                            + "PreferencePositionCallback");
                 } else {
-                    position = ((PreferenceGroup.PreferencePositionCallback) adapter)
-                            .getPreferenceAdapterPosition(key);
+                    // Adapter was set to null, so don't scroll I guess?
+                    return;
                 }
-                if (position != RecyclerView.NO_POSITION) {
-                    mList.scrollToPosition(position);
-                } else {
-                    // Item not found, wait for an update and try again
-                    adapter.registerAdapterDataObserver(
-                            new ScrollToPreferenceObserver(adapter, mList, preference, key));
-                }
+            }
+            final int position;
+            if (preference != null) {
+                position = ((PreferenceGroup.PreferencePositionCallback) adapter)
+                        .getPreferenceAdapterPosition(preference);
+            } else {
+                position = ((PreferenceGroup.PreferencePositionCallback) adapter)
+                        .getPreferenceAdapterPosition(key);
+            }
+            if (position != RecyclerView.NO_POSITION) {
+                mList.scrollToPosition(position);
+            } else {
+                // Item not found, wait for an update and try again
+                adapter.registerAdapterDataObserver(
+                        new ScrollToPreferenceObserver(adapter, mList, preference, key));
             }
         };
         if (mList == null) {

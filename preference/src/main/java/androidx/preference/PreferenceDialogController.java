@@ -86,18 +86,11 @@ public abstract class PreferenceDialogController extends Controller implements
     final protected View onCreateView(@NonNull LayoutInflater inflater,
                                       @NonNull ViewGroup container,
                                       @Nullable Bundle savedViewState) {
-
         onCreate(savedViewState);
 
         dialog = onCreateDialog(savedViewState);
-        //noinspection ConstantConditions
         dialog.setOwnerActivity(getActivity());
-        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                PreferenceDialogController.this.dismissDialog();
-            }
-        });
+        dialog.setOnDismissListener(dialog -> PreferenceDialogController.this.dismissDialog());
         if (savedViewState != null) {
             Bundle dialogState = savedViewState.getBundle(SAVE_DIALOG_STATE_TAG);
             if (dialogState != null) {
@@ -119,7 +112,7 @@ public abstract class PreferenceDialogController extends Controller implements
 
         final String key = getArgs().getString(ARG_KEY);
         if (savedInstanceState == null) {
-            mPreference = (DialogPreference) controller.findPreference(key);
+            mPreference = controller.findPreference(key);
             mDialogTitle = mPreference.getDialogTitle();
             mPositiveButtonText = mPreference.getPositiveButtonText();
             mNegativeButtonText = mPreference.getNegativeButtonText();
@@ -278,7 +271,7 @@ public abstract class PreferenceDialogController extends Controller implements
             final String key = getArgs().getString(ARG_KEY);
             final DialogPreference.TargetFragment controller =
                     (DialogPreference.TargetFragment) getTargetController();
-            mPreference = (DialogPreference) controller.findPreference(key);
+            mPreference = controller.findPreference(key);
         }
         return mPreference;
     }
