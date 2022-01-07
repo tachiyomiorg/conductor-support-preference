@@ -113,6 +113,9 @@ public abstract class PreferenceDialogController extends Controller implements
         final String key = getArgs().getString(ARG_KEY);
         if (savedInstanceState == null) {
             mPreference = controller.findPreference(key);
+            if (mPreference.getDialogTitle() == null) {
+                mPreference.setDialogTitle(mPreference.getTitle());
+            }
             mDialogTitle = mPreference.getDialogTitle();
             mPositiveButtonText = mPreference.getPositiveButtonText();
             mNegativeButtonText = mPreference.getNegativeButtonText();
