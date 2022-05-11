@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 32
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 32
     }
 
     buildTypes {
@@ -25,9 +25,9 @@ android {
 }
 
 dependencies {
-    compileOnly 'androidx.preference:preference:1.2.0-rc01'
-    compileOnly 'com.google.android.material:material:1.6.0-alpha01'
-    compileOnly 'com.bluelinelabs:conductor:3.1.2'
+    compileOnly 'androidx.preference:preference:1.2.0'
+    compileOnly 'com.google.android.material:material:1.7.0-alpha01'
+    compileOnly 'com.bluelinelabs:conductor:3.1.4'
 }
 
 task androidSourcesJar(type: Jar) {
