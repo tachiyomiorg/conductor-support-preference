@@ -10,7 +10,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.tachiyomiorg:conductor-support-preference:3.1.2'
+    implementation 'com.github.tachiyomiorg:conductor-support-preference:3.1.7'
 }
 ```
 
