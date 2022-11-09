@@ -26,8 +26,8 @@ android {
 
 dependencies {
     compileOnly 'androidx.preference:preference:1.2.0'
-    compileOnly 'com.google.android.material:material:1.7.0-alpha03'
-    compileOnly 'com.bluelinelabs:conductor:3.1.7'
+    compileOnly 'com.google.android.material:material:1.7.0'
+    compileOnly 'com.bluelinelabs:conductor:3.1.8'
 }
 
 task androidSourcesJar(type: Jar) {
